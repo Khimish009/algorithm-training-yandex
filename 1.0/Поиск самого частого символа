@@ -1,0 +1,75 @@
+Найти самый часто встречающайся символ в строке. Если несколько символов встречаются одинаково, то можно вывысти любой.
+
+1 решение: Время: O(N + k) = O(N) | Память O(k)
+function getFrequentlyOccuringCharacter(str) {
+  const obj = {}
+  let count = 0
+
+  for (let i = 0; i < str.length; i++) {
+    const value = str[i]
+    if (!obj[value]) {
+      obj[value] = 0
+    }
+
+    obj[str[i]] += 1
+  }
+
+  for (charNumbers in obj) {
+    if (obj[charNumbers] > count) {
+      count = obj[charNumbers]
+    }
+  }
+
+  return count
+}
+
+
+2 решение: O(N * k) || Память: O(N + k) = O(N)
+function getFrequentlyOccuringCharacter(str) {
+  const uniqueCharacters = new Set(str).size
+  let character = ''
+  let count = 0
+
+  for (let i = 0; i < uniqueCharacters; i++) {
+    let localCount = 0
+
+    for (let j = 0; j < str.length; j++) {
+      if (str[i] === str[j]) {
+        localCount++
+      }
+    }
+
+    if (localCount > count) {
+      count = localCount
+      character = str[i]
+    }
+  }
+
+  return character
+}
+
+console.log(getFrequentlyOccuringCharacter('abaabadddfffdsaa'));
+
+3 решение:O(N2) || Память: O(N)
+function getFrequentlyOccuringCharacter(str) {
+  let character = ''
+  let count = 0
+
+  for (let i = 0; i < str.length; i++) {
+    let localCount = 0
+    for (let j = 0; j < str.length; j++) {
+      if (str[i] === str[j]) {
+        localCount++
+      }
+    }
+
+    if (localCount > count) {
+      count = localCount
+      character = str[i]
+    }
+  }
+
+  return character
+}
+
+console.log(getFrequentlyOccuringCharacter('abaabadddfffdsaa'));
